@@ -1,0 +1,11 @@
+.env
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+
+jobberwocky.db
+test.db
