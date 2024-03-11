@@ -12,7 +12,7 @@ bin/run_tests.sh
 bin/run_server.sh
 ```
 
-## 3. Run container
+## 3. Run local container
 
 ```
 bin/run_container.sh
@@ -22,4 +22,19 @@ bin/run_container.sh
 
 ```
 Go to http://localhost:8000/docs
+```
+
+
+# Helm chart deployment
+
+## 1. Install the chart or upgrade the deployment
+
+```
+bin/install_upgrade_chart.sh
+```
+
+## 2. Check the api doc (UI)
+
+```
+Go to http://localhost:30000/docs
 ```

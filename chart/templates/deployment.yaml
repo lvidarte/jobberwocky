@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "jobberwocky.fullname" . }}
+  labels:
+    app: {{ include "jobberwocky.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "jobberwocky.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "jobberwocky.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            {{- toYaml .Values.env | nindent 12 }}
+          command:
+            - "uvicorn"
+            - "main:app"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "8000"
+            - "--log-config"
+            - "logconf.yaml"
