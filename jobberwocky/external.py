@@ -35,7 +35,7 @@ class ExternalAPI:
         url = self._get_full_url(params)
         logger.debug(f"Getting external jobs from {url}")
         try:
-            response = requests.get(url)
+            response = requests.get(url, timeout=config.EXTERNAL_API_TIMEOUT)
             return [
                 schemas.Job(
                     title=data[0],
