@@ -87,7 +87,7 @@ class TestJobs(unittest.TestCase):
             title="Sr Golang Developer",
             salary=40000,
             country="Argentina",
-            skills=["python"],
+            skills=["concurrency"],
         )
         result = jobs.create(job)
 
