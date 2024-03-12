@@ -22,6 +22,16 @@ spec:
             - containerPort: 8000
           env:
             {{- toYaml .Values.env | nindent 12 }}
+            - name: JOBBERWOCKY_MAILGUN_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: jobberwocky-secrets
+                  key: jobberwocky_mailgun_domain
+            - name: JOBBERWOCKY_MAILGUN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jobberwocky-secrets
+                  key: jobberwocky_mailgun_api_key
           command:
             - "uvicorn"
             - "main:app"

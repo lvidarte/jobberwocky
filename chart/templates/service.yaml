@@ -11,5 +11,5 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
       protocol: TCP
-      nodePort: 30000
+      nodePort: {{ .Values.service.nodePort }}
   type: {{ .Values.service.type }}

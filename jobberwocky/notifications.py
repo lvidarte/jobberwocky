@@ -20,7 +20,6 @@ def notify(job: schemas.Job) -> None:
 
 
 def send_email(email: str, job_uri: str) -> None:
-    logger.info(f"Sending email to {email}")
     try:
         response = requests.post(
             f"https://api.mailgun.net/v3/{config.MAILGUN_DOMAIN}/messages",

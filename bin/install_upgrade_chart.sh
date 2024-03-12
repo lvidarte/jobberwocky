@@ -1,7 +1,8 @@
 #!/bin/bash
 
-namespace="avature"
 release="jobberwocky"
+namespace="avature"
+secrets_name="${release}-secrets"
 chart_dir="chart"
 
 function check_command() {
@@ -13,6 +14,11 @@ function check_command() {
   fi
 }
 
+if ! helm lint $chart_dir; then
+  echo "Helm chart validation failed. Aborting."
+  exit 1
+fi
+
 check_command helm
 check_command kubectl
 
@@ -21,7 +27,16 @@ if ! kubectl get namespace $namespace &>/dev/null; then
   kubectl create namespace $namespace
 fi
 
-if ! helm status $release --namespace $namespace 2>&1 >/dev/null; then
+if ! kubectl get secrets $secrets_name -n $namespace &>/dev/null; then
+  echo
+  echo "Creating secrets ${secrets_name}..."
+  kubectl create secret generic $secrets_name \
+    --namespace $namespace \
+    --from-literal=jobberwocky_mailgun_domain="$JOBBERWOCKY_MAILGUN_DOMAIN" \
+    --from-literal=jobberwocky_mailgun_api_key="$JOBBERWOCKY_MAILGUN_API_KEY"
+fi
+
+if ! helm status $release --namespace $namespace &>/dev/null; then
   echo
   echo "Installing chart ${release} into namespace ${namespace}..."
   helm install $release $chart_dir --namespace $namespace

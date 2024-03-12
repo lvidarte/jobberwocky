@@ -8,19 +8,16 @@ image:
 service:
   type: NodePort
   port: 8000
+  nodePort: 30000
 
 env:
   - name: JOBBERWOCKY_LOG_LEVEL
     value: "DEBUG"
   - name: JOBBERWOCKY_APP_URL
-    value: "http://localhost:8000"
+    value: "http://localhost:30000"
   - name: JOBBERWOCKY_DATABASE_URL
     value: "sqlite:///jobberwocky.db"
   - name: JOBBERWOCKY_EXTRA_SOURCE_URL
     value: "http://avatureexternaljobs:8080/jobs"
   - name: JOBBERWOCKY_EXTRA_SOURCE_TIMEOUT
     value: "3"
-  - name: JOBBERWOCKY_MAILGUN_DOMAIN
-    value: ""
-  - name: JOBBERWOCKY_MAILGUN_API_KEY
-    value: ""
