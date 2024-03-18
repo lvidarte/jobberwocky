@@ -38,3 +38,15 @@ bin/install_upgrade_chart.sh
 ```
 Go to http://localhost:30000/docs
 ```
+
+# SonarQube code analysis
+
+```
+bin/run_sonarqube.sh
+```
+
+# Trivy docker image analysis
+
+```
+bin/run_trivy.sh
+```

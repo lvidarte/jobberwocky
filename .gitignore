@@ -11,3 +11,5 @@ __pycache__/
 jobberwocky.db
 jobberwocky-*.tgz
 test.db
+
+.scannerwork
